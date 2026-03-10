@@ -1,0 +1,24 @@
+#pragma once
+#include <stdint.h>
+
+namespace interrupt {
+    struct [[gnu::packed]] IDTEntry {
+        uint16_t offset_low;
+        uint16_t selector;
+        uint8_t  ist;
+        uint8_t  type_attr;
+        uint16_t offset_mid;
+        uint32_t offset_high;
+        uint32_t reserved;
+    };
+
+    struct [[gnu::packed]] IDTPointer {
+        uint16_t limit;
+        uint64_t base;
+    };
+
+    void init();
+    void set_gate(int num, uint64_t handler, uint8_t type = 0x8E);
+}
+
+extern "C" void load_idt(interrupt::IDTPointer* idt_ptr);
