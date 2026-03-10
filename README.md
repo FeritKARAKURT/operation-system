@@ -1,72 +1,38 @@
-C++ ve Assembly ile geliştirilmiş, x86 mimarisini hedefleyen, minimal ve hobi amaçlı bir işletim sistemi çekirdeği.
+Kernel Project
+C++ ve Assembly kullanılarak geliştirilmiş, x86 mimarisini hedefleyen düşük seviyeli bir işletim sistemi çekirdeği.
 
-📌 Proje Hakkında
-Bu proje, bir bilgisayarın en temel seviyede nasıl çalıştığını anlamak ve donanım ile doğrudan iletişim kuran bir sistem inşa etmek amacıyla geliştirilmiştir. Kendi bootloader'ından bellek yönetimine kadar birçok bileşeni sıfırdan içermektedir.
+Proje Hakkında
+Bu çalışma, donanım seviyesinde sistem programlama ve çekirdek mimarilerini anlamak amacıyla geliştirilmiştir. Modern görüntüleme teknikleri ve temel donanım sürücülerini içerir.
 
-✨ Öne Çıkan Özellikler
-Özel Bootloader: Grub veya benzeri bir bootloader yerine özelleştirilmiş önyükleme mekanizması.
+Özellikler
+Özel Bootloader: Sistemi başlatan ve korumalı moda geçişi sağlayan önyükleme mekanizması.
+
+Framebuffer Desteği: VGA metin modu yerine yüksek çözünürlüklü grafik çıktı almayı sağlayan Framebuffer implementasyonu.
 
 GDT & IDT: Global Descriptor Table ve Interrupt Descriptor Table yapılandırması.
 
-Bellek Yönetimi: Paging ve basit bir heap allocator.
+Hafıza Yönetimi: Paging (sayfalama) ve kernel-level heap allocator.
 
-VGA Sürücüsü: Ekranda metin yazdırma ve renk desteği.
+Giriş Birimleri: Kesme tabanlı klavye sürücüsü.
 
-Klavye Sürücüsü: Kesme (interrupt) tabanlı temel giriş desteği.
-
-🛠️ Teknik Detaylar
-Proje temel olarak aşağıdaki teknolojileri kullanmaktadır:
-
+Teknik Yığın
 Diller: C++, C, x86 Assembly (NASM)
 
-Mimari: x86 (32-bit/64-bit)
+Mimari: x86_64 / x86
 
-Derleyici: gcc-cross-compiler, nasm
+Araçlar: GCC Cross-Compiler, Make, Linker scripts
 
-Emülatör: QEMU veya Bochs
+Emülatör: QEMU
 
-🚀 Başlangıç
-Projeyi kendi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyebilirsiniz.
-
+Kurulum ve Çalıştırma
 Gereksinimler
-Sisteminizde aşağıdaki araçların kurulu olduğundan emin olun:
-
 Bash
-sudo apt install nasm qemu-system-x86 build-essential
-Derleme ve Çalıştırma
-Depoyu klonlayın:
-
+sudo apt install nasm qemu-system-x86 build-essential grub-pc-bin xorriso
+Derleme
 Bash
-git clone https://github.com/kullanici-adin/isletim-sistemi-adi.git
-cd isletim-sistemi-adi
-Projeyi derleyin (Makefile varsa):
-
-Bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
 make
-QEMU üzerinde test edin:
-
+Test Etme
 Bash
-make run
-📂 Dosya Yapısı
-/src: Tüm kaynak kodlar (C++ ve ASM).
-
-/boot: Bootloader dosyaları.
-
-/include: Header (.h) dosyaları.
-
-/scripts: Derleme ve ISO oluşturma betikleri.
-
-🛠️ Gelecek Planları (Roadmap)
-[ ] Dosya sistemi desteği (FAT32/ext2).
-
-[ ] Multitasking (Çoklu görev) desteği.
-
-[ ] Kullanıcı modu (User mode) ve syscalls.
-
-[ ] Grafik arayüzü (GUI) başlangıcı.
-
-🤝 Katkıda Bulunma
-Katkı sağlamak isterseniz lütfen bir "Issue" açın veya doğrudan bir "Pull Request" gönderin. Her türlü fikir ve geliştirmeye açığım!
-
-📄 Lisans
-Bu proje MIT Lisansı altında lisanslanmıştır. Daha fazla bilgi için LICENSE dosyasına göz atabilirsiniz.
+qemu-system-x86_64 -drive format=raw,file=os-image.bin
