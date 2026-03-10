@@ -23,16 +23,3 @@ Mimari: x86_64 / x86
 Araçlar: GCC Cross-Compiler, Make, Linker scripts
 
 Emülatör: QEMU
-
-Kurulum ve Çalıştırma
-Gereksinimler
-Bash
-sudo apt install nasm qemu-system-x86 build-essential grub-pc-bin xorriso
-Derleme
-Bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
-make
-Test Etme
-Bash
-qemu-system-x86_64 -drive format=raw,file=os-image.bin
